@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * 购物车
@@ -47,4 +48,6 @@ public class ShoppingCart implements Serializable {
     private String image;
 
     private LocalDateTime createTime;
+
+
 }
