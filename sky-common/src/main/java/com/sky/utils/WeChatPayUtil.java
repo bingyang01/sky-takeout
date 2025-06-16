@@ -132,6 +132,7 @@ public class WeChatPayUtil {
      * @return
      */
     private String jsapi(String orderNum, BigDecimal total, String description, String openid) throws Exception {
+//        准备调用接口需要的参数
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("appid", weChatProperties.getAppid());
         jsonObject.put("mchid", weChatProperties.getMchid());
