@@ -7,9 +7,11 @@ import com.sky.result.Result;
 import com.sky.service.OrderService;
 import com.sky.vo.OrderPaymentVO;
 import com.sky.vo.OrderSubmitVO;
+import com.sky.vo.OrderVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.codehaus.jettison.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +31,7 @@ public class OrderController {
      */
     @PostMapping("/submit")
     @ApiOperation("用户下单")
-    public Result<OrderSubmitVO> submit(@RequestBody OrdersSubmitDTO ordersSubmitDTO){
+    public Result<OrderSubmitVO> submit(@RequestBody OrdersSubmitDTO ordersSubmitDTO) throws JSONException {
         log.info("用户下单，参数为:{}",ordersSubmitDTO);
         OrderSubmitVO orderSubmitVO = orderService.submitOrder(ordersSubmitDTO);
         return Result.success(orderSubmitVO);
@@ -55,10 +57,30 @@ public class OrderController {
 
     @GetMapping("/historyOrders")
     @ApiOperation("查询历史订单")
-    public Result<PageResult> page(int page, int pageSize, Integer status){
+    public Result<PageResult> page( int page, int pageSize, Integer status){
         PageResult pageResult= orderService.pageQuery(page,pageSize, status);
 
         return Result.success(pageResult);
+    }
 
+    @GetMapping("/orderDetail/{id}")
+    @ApiOperation("查询订单详情")
+    public Result<OrderVO> details(@PathVariable Long id){
+        OrderVO orderVO = orderService.details(id);
+        return Result.success(orderVO);
+    }
+
+    @PutMapping ("/cancel/{id}")
+    @ApiOperation("user cancel order")
+    public Result cancel(@PathVariable Long id) {
+        orderService.userCancelById(id);
+        return Result.success();
+    }
+
+    @PostMapping("/repetition/{id}")
+    @ApiOperation("再来一单")
+    public  Result repetition(@PathVariable Long id){
+        orderService.repetition(id);
+        return Result.success();
     }
 }
