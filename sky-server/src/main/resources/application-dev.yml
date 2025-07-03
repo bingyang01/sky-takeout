@@ -9,9 +9,9 @@ sky:
 
   alioss:
     endpoint: oss-cn-hangzhou.aliyuncs.com
-    access-key-id: LTAI5tRGA6rNkoy6VFkoSKAA
+    access-key-id: 
 
-    access-key-secret: 3ulP5VAdLxEtypmuYx07vpkdej4QyO
+    access-key-secret: 
     bucket-name: sky-itcast-lby
 
   redis:
